@@ -74,4 +74,4 @@ Base URL: `https://api.spectra.nuelo.ai`
 
 ---
 
-Built by [Nuelo](https://nuelo.ai)
+Built by [Nuelo](https://nuelo.ai) · [GitHub](https://github.com/nuelo-ai/spectra-openclaw-skills)
