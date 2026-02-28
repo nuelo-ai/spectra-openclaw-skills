@@ -301,6 +301,32 @@ To send a chart as an image:
 **Note:** When taking the screenshot, ensure the chart is fully loaded and visible. Adjust the viewport if needed.
 
 
+## Output Storage Location
+
+**All generated chart HTML files must be saved to:**
+```
+~/.openclaw/workspace/spectra-outputs/
+```
+
+**Naming convention:** Use descriptive, kebab-case names:
+- `abc-analysis-inventory.html`
+- `revenue-by-region-q4.html`
+- `sales-trend-monthly.html`
+
+**Organization:** Create subfolders by date if outputs accumulate:
+```
+spectra-outputs/
+├── 2026-02-26/
+│   └── spectra-chart.html
+├── 2026-02-28/
+│   ├── abc-chart.html
+│   ├── kartu-kredit-ratio.html
+│   └── seasonal-chart.html
+```
+
+**Cleanup:** Periodically review and archive old outputs (older than 30 days) to prevent workspace clutter.
+
+
 ## Transparency — Always Label the Source
 
 When presenting results, be clear about what comes from Spectra vs. any additions you make:
