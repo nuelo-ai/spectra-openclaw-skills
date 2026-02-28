@@ -108,7 +108,8 @@ If `chart_specs` is non-null, render it as an interactive HTML artifact using Pl
 
 - Present the `analysis` field as the main narrative
 - Show the `execution_result` data table if provided
-- Render chart from `chart_specs` if provided
+- **ALWAYS render and present the chart** from `chart_specs` if provided (this is mandatory!)
+- For chat platforms (Telegram, Discord, etc.): Convert the chart to an image and send it
 - Offer follow-up questions from `follow_up_suggestions` if available
 - **Do not add personal interpretation or synthesis** — present only what Spectra returns
 
@@ -218,11 +219,26 @@ curl -s -X DELETE "https://api.spectra.nuelo.ai/api/v1/files/{file_id}" \
 **Always confirm with user before deleting.**
 
 
-## Chart Rendering
+## Chart Rendering & Delivery
 
-### If `chart_specs` is returned
+### Key Instructions
 
-Parse the JSON string and render using Plotly.js in an HTML artifact:
+1. **Always present the chart** — If Spectra returns a non-null `chart_specs`, you MUST render and present it to the requester. Never skip charts.
+
+2. **Make it sleek and presentable** — When rendering charts:
+   - Add a clear, descriptive title in the chart layout
+   - Include a brief description/analysis result from Spectra (from the `analysis` field) as a caption or subtitle
+   - Use clean styling: white/transparent background, readable fonts, appropriate colors
+   - Ensure axes have clear labels
+
+3. **For chat platforms (Telegram, Discord, etc.) — convert to image** — If the user is on a messaging platform (Telegram, Discord, WhatsApp, Signal, etc.):
+   - Navigate to the rendered chart in a browser
+   - Take a screenshot
+   - Send the image via the messaging tool with a brief caption explaining what the chart shows
+
+### Rendering Charts
+
+If `chart_specs` is returned, parse the JSON string and render using Plotly.js in an HTML artifact:
 
 ```html
 <!DOCTYPE html>
@@ -246,6 +262,38 @@ Parse the JSON string and render using Plotly.js in an HTML artifact:
 </body>
 </html>
 ```
+
+
+### Converting Charts to Images (for Telegram, Discord, etc.)
+
+To send a chart as an image:
+
+1. Start a local HTTP server in the workspace directory:
+   ```bash
+   cd ~/.openclaw/workspace && python3 -m http.server 8888 &
+   ```
+
+2. Navigate to the chart in the OpenClaw browser (profile="openclaw"):
+   ```
+   http://localhost:8888/your-chart-file.html
+   ```
+
+3. Take a screenshot using the browser tool
+
+4. Send the image via the message tool:
+   ```json
+   {
+     "action": "send",
+     "channel": "telegram",  // or discord, whatsapp, etc.
+     "target": "telegram:7581487482",
+     "media": "/path/to/screenshot.png",
+     "caption": "Your chart description"
+   }
+   ```
+
+5. Stop the browser and HTTP server when done
+
+**Note:** When taking the screenshot, ensure the chart is fully loaded and visible. Adjust the viewport if needed.
 
 
 ## Transparency — Always Label the Source
