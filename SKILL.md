@@ -106,12 +106,17 @@ If `chart_specs` is non-null, render it as an interactive HTML artifact using Pl
 
 ### Step 5 — Communicate Results
 
-- Present the `analysis` field as the main narrative
-- Show the `execution_result` data table if provided
-- **ALWAYS render and present the chart** from `chart_specs` if provided (this is mandatory!)
-- For chat platforms (Telegram, Discord, etc.): Convert the chart to an image and send it
-- Offer follow-up questions from `follow_up_suggestions` if available
-- **Do not add personal interpretation or synthesis** — present only what Spectra returns
+When presenting Spectra results, you MUST include ALL three components:
+
+1. **The Analysis** — Present the `analysis` field as the main narrative. This is Spectra's expert analysis — do NOT synthesize, add your own interpretation, or paraphrase. Present it exactly as provided.
+
+2. **The Tables** — Show the `execution_result` data table if provided. Format it nicely as a markdown table.
+
+3. **The Chart** — **ALWAYS render and present the chart** from `chart_specs` if provided (this is mandatory!). For chat platforms (Telegram, Discord, etc.): Convert the chart to an image and send it.
+
+4. **Follow-up Suggestions** — Offer follow-up questions from `follow_up_suggestions` if available.
+
+**CRITICAL: Do NOT add personal interpretation or synthesis.** Spectra is the expert. Your job is to render and present the information nicely — not to analyze it. Present only what Spectra returns.
 
 
 ## Making API Calls
